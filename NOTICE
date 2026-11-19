@@ -1,0 +1,12 @@
+StarCat Launcher
+Copyright 2026 StarCat
+
+Este projeto é um trabalho derivado do LeviLauncher-Android
+(https://github.com/LiteLDev/LeviLauncher-Android), Copyright LiteLDev e colaboradores,
+licenciado sob a Apache License 2.0 (veja o arquivo LICENSE).
+
+Alterações: nome, identidade visual, termos de uso, remoção de Discord Rich Presence,
+Firebase/Crashlytics e de chaves de terceiros, e novos endpoints de atualização/notícias.
+
+O módulo pojav_controls mantém seu próprio NOTICE e LICENSE.
+Minecraft é marca da Mojang/Microsoft. Este projeto não é afiliado a elas.
