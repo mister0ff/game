@@ -18,6 +18,12 @@ Android 9+ (API 28), ARM64, Minecraft Bedrock comprado na Google Play (necessár
 
 No GitHub, o workflow **Android CI** faz tudo isso e publica o APK como artefato.
 
+## libgxcore.so
+`app/src/main/cpp/gxcore` é a nossa implementação aberta do `libgxcore.so` (o binário fechado do LeviLauncher
+não é usado). Ela cobre as 4 funções nativas de `NativeBridgeHelper`: verificar/preparar bibliotecas (valida o ELF e
+copia), bootstrap (nada a fazer) e carregar o runtime do Minecraft (lê o `DT_NEEDED` e faz `dlopen` das dependências
+na ordem). Não há ligação com o Discord.
+
 ## Termos
 Aparecem na primeira abertura (`eula_*` em `res/values*/strings.xml`).
 

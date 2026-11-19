@@ -22,6 +22,12 @@ object NativeBridgeHelper {
         return LauncherApplication.context
     }
 
+    @Volatile
+    private var gxcoreError: String? = null
+
+    @JvmStatic
+    fun gxCoreLoadError(): String? = gxcoreError
+
     @JvmStatic
     fun ensureGxCoreLoaded(): Boolean {
         if (gxcoreLoaded) {
@@ -35,7 +41,9 @@ object NativeBridgeHelper {
                     System.loadLibrary("gxcore")
                     gxcoreLoaded = true
                     true
-                } catch (_: Throwable) {
+                } catch (t: Throwable) {
+                    gxcoreError = t.toString()
+                    android.util.Log.e("StarCat", "Failed to load gxcore", t)
                     false
                 }
             }
