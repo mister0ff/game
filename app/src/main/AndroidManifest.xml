@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingClass">
 
+    <!-- Features Obrigatórias/Opcionais -->
     <uses-feature
         android:glEsVersion="0x20000"
         android:required="true" />
@@ -13,19 +14,17 @@
         android:name="android.hardware.microphone"
         android:required="false" />
 
+    <!-- Permissões de Armazenamento (Removidas para compatibilidade com Scoped Storage) -->
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:node="remove" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:node="remove" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" tools:node="remove" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" tools:node="remove" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" tools:node="remove" />
+
+    <!-- Permissões Ativas -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" tools:node="remove" />
-    <uses-permission android:name="android.permission.BLUETOOTH" tools:node="remove" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" tools:node="remove" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" tools:node="remove" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" tools:node="remove" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -34,21 +33,31 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" tools:node="remove" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" tools:node="remove" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"
         tools:ignore="RequestInstallPackagesPolicy" />
+
+    <!-- Queries para detecção de apps e intents -->
     <queries>
+        <!-- Discord RPC -->
         <package android:name="com.discord" />
         <intent>
             <action android:name="com.discord.socialsdk.rpc.IDiscordRpcService" />
         </intent>
+
+        <!-- Minecraft Bedrock (Oficial) -->
         <package android:name="com.mojang.minecraftpe" />
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="minecraft" />
+        </intent>
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.BROWSABLE" />
             <data android:scheme="https" />
         </intent>
+
+        <!-- Custom Tabs (Chrome/Brave/etc) -->
         <intent>
             <action android:name="android.support.customtabs.action.CustomTabsService" />
         </intent>
@@ -62,13 +71,16 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true">
 
+        <!-- Remove componentes desnecessários do SDK do Discord -->
         <activity android:name="com.discord.socialsdk.AuthenticationActivity" tools:node="remove" />
         <service android:name="com.discord.socialsdk.ForegroundService" tools:node="remove" />
 
+        <!-- Meta-dados do Google Play Games (se aplicável) -->
         <meta-data
             android:name="com.google.android.gms.games.APP_ID"
             android:value="486187589451"/>
 
+        <!-- Splash Screen -->
         <activity
             android:name="org.levimc.launcher.ui.activities.SplashActivity"
             android:exported="true"
@@ -81,6 +93,7 @@
             </intent-filter>
         </activity>
 
+        <!-- Main Activity -->
         <activity
             android:name="org.levimc.launcher.ui.activities.MainActivity"
             android:exported="true"
@@ -89,6 +102,7 @@
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
             tools:ignore="DiscouragedApi" />
 
+        <!-- Activities de UI -->
         <activity
             android:name="org.levimc.launcher.ui.activities.ContentManagementActivity"
             android:exported="false"
@@ -115,24 +129,24 @@
             android:exported="false"
             android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
-            tools:ignore="DiscouragedApi"
-            android:label="@string/edit_world" />
+            android:label="@string/edit_world"
+            tools:ignore="DiscouragedApi" />
 
         <activity
             android:name="org.levimc.launcher.ui.activities.OptionsEditorActivity"
             android:exported="false"
             android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
-            tools:ignore="DiscouragedApi"
-            android:label="@string/edit_options" />
+            android:label="@string/edit_options"
+            tools:ignore="DiscouragedApi" />
 
         <activity
             android:name="org.levimc.launcher.ui.activities.CustomFlatWorldActivity"
             android:exported="false"
             android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
-            tools:ignore="DiscouragedApi"
-            android:label="@string/custom_flat_world" />
+            android:label="@string/custom_flat_world"
+            tools:ignore="DiscouragedApi" />
 
         <activity
             android:name="org.levimc.launcher.ui.activities.AboutActivity"
@@ -153,8 +167,8 @@
             android:exported="false"
             android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
-            tools:ignore="DiscouragedApi"
-            android:label="@string/settings_title" />
+            android:label="@string/settings_title"
+            tools:ignore="DiscouragedApi" />
 
         <activity
             android:name="org.levimc.launcher.ui.activities.InstanceSettingsActivity"
@@ -169,8 +183,8 @@
             android:exported="false"
             android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
-            tools:ignore="DiscouragedApi"
-            android:label="@string/accounts_title" />
+            android:label="@string/accounts_title"
+            tools:ignore="DiscouragedApi" />
 
         <activity
             android:name="org.levimc.launcher.ui.activities.GameDownloadActivity"
@@ -196,6 +210,7 @@
             android:windowSoftInputMode="adjustResize"
             tools:ignore="DiscouragedApi" />
 
+        <!-- Mods Fullscreen Activities -->
         <activity
             android:name=".ui.activities.ModsFullscreenActivity"
             android:theme="@style/Base.Theme.FullScreen"
@@ -228,8 +243,7 @@
             android:exported="false"
             tools:ignore="DiscouragedApi" />
 
-
-
+        <!-- CurseForge -->
         <activity
             android:name="org.levimc.launcher.ui.activities.CurseForgeActivity"
             android:theme="@style/Base.Theme.FullScreen"
@@ -238,6 +252,7 @@
             android:exported="false"
             tools:ignore="DiscouragedApi" />
 
+        <!-- Packages -->
         <activity
             android:name=".ui.packages.PackagesActivity"
             android:theme="@style/Base.Theme.FullScreen"
@@ -253,8 +268,10 @@
             android:screenOrientation="sensorLandscape"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc"
             android:exported="false"
+            android:windowSoftInputMode="adjustPan"
             tools:ignore="DiscouragedApi" />
 
+        <!-- Content Details -->
         <activity
             android:name=".ui.activities.ContentDetailsActivity"
             android:theme="@style/Base.Theme.FullScreen"
@@ -263,6 +280,7 @@
             android:exported="false"
             tools:ignore="DiscouragedApi" />
 
+        <!-- Quick Launch -->
         <activity
             android:name=".ui.activities.QuickLaunchActivity"
             android:theme="@style/Base.Theme.FullScreen"
@@ -272,6 +290,11 @@
             android:label="@string/quick_launch_title"
             tools:ignore="DiscouragedApi" />
 
+        <!-- 
+            INTENT HANDLER: O Coração do Bypass
+            Captura URIs minecraft://, arquivos locais (.mcworld, .zip) e links web.
+            Deve ser exported=true para receber intents de outros apps.
+        -->
         <activity
             android:name=".ui.activities.IntentHandler"
             android:alwaysRetainTaskState="true"
@@ -281,183 +304,58 @@
             android:launchMode="singleTask"
             android:screenOrientation="sensorLandscape"
             tools:ignore="DiscouragedApi">
+            
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="preloader" />
 
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-
+            <!-- 1. Captura URIs minecraft:// (Deep Links) -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="minecraft" />
             </intent-filter>
-            
+
+            <!-- 2. Captura Arquivos Locais (.mcworld, .mcpack, .zip, etc) -->
+            <!-- Estes filtros garantem que o launcher apareça no menu "Abrir com" -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="content" />
-                <data android:scheme="file" />
+                <!-- Mimetypes genéricos para arquivos -->
                 <data android:mimeType="application/zip" />
                 <data android:mimeType="application/x-zip" />
                 <data android:mimeType="application/x-zip-compressed" />
                 <data android:mimeType="application/octet-stream" />
-            </intent-filter>
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="content" />
-                <data android:scheme="file" />
-                <data android:host="*" />
-                <data android:pathPattern="/.*\\.zip" />
-                <data android:pathPattern="/.*\\..*\\.zip" />
-                <data android:pathPattern="/.*\\..*\\..*\\.zip" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.zip" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.zip" />
-                <data android:pathPattern="/.*\\.levibackup" />
-                <data android:pathPattern="/.*\\..*\\.levibackup" />
-                <data android:pathPattern="/.*\\..*\\..*\\.levibackup" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.levibackup" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.levibackup" />
-                <data android:pathPattern="/.*\\.levipack" />
-                <data android:pathPattern="/.*\\..*\\.levipack" />
-                <data android:pathPattern="/.*\\..*\\..*\\.levipack" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.levipack" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.levipack" />
-                <data android:pathPattern="/.*\\.mcmod" />
-                <data android:pathPattern="/.*\\..*\\.mcmod" />
-                <data android:pathPattern="/.*\\..*\\..*\\.mcmod" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.mcmod" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.mcmod" />
-                <data android:pathPattern="/.*\\.so" />
-                <data android:pathPattern="/.*\\..*\\.so" />
-                <data android:pathPattern="/.*\\..*\\..*\\.so" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.so" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.so" />
-                <data android:pathPattern="/.*\\.mcworld" />
-                <data android:pathPattern="/.*\\..*\\.mcworld" />
-                <data android:pathPattern="/.*\\..*\\..*\\.mcworld" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.mcworld" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.mcworld" />
-                <data android:pathPattern="/.*\\.mcpack" />
-                <data android:pathPattern="/.*\\..*\\.mcpack" />
-                <data android:pathPattern="/.*\\..*\\..*\\.mcpack" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.mcpack" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.mcpack" />
-                <data android:pathPattern="/.*\\.mcaddon" />
-                <data android:pathPattern="/.*\\..*\\.mcaddon" />
-                <data android:pathPattern="/.*\\..*\\..*\\.mcaddon" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.mcaddon" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.mcaddon" />
-                <data android:pathPattern="/.*\\.mctemplate" />
-                <data android:pathPattern="/.*\\..*\\.mctemplate" />
-                <data android:pathPattern="/.*\\..*\\..*\\.mctemplate" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.mctemplate" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.mctemplate" />
-                <data android:pathSuffix=".zip" />
-                <data android:pathSuffix=".levibackup" />
-                <data android:pathSuffix=".levipack" />
-                <data android:pathSuffix=".mcmod" />
-                <data android:pathSuffix=".so" />
-                <data android:pathSuffix=".mcworld" />
-                <data android:pathSuffix=".mcpack" />
-                <data android:pathSuffix=".mcaddon" />
-                <data android:pathSuffix=".mctemplate" />
-            </intent-filter>
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="content" />
-                <data android:scheme="file" />
                 <data android:mimeType="*/*" />
-                <data android:host="*" />
-                <data android:pathPattern="/.*\\.zip" />
-                <data android:pathPattern="/.*\\..*\\.zip" />
-                <data android:pathPattern="/.*\\..*\\..*\\.zip" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.zip" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.zip" />
-                <data android:pathPattern="/.*\\.levibackup" />
-                <data android:pathPattern="/.*\\..*\\.levibackup" />
-                <data android:pathPattern="/.*\\..*\\..*\\.levibackup" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.levibackup" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.levibackup" />
-                <data android:pathPattern="/.*\\.levipack" />
-                <data android:pathPattern="/.*\\..*\\.levipack" />
-                <data android:pathPattern="/.*\\..*\\..*\\.levipack" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.levipack" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.levipack" />
-                <data android:pathPattern="/.*\\.mcmod" />
-                <data android:pathPattern="/.*\\..*\\.mcmod" />
-                <data android:pathPattern="/.*\\..*\\..*\\.mcmod" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.mcmod" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.mcmod" />
-                <data android:pathPattern="/.*\\.so" />
-                <data android:pathPattern="/.*\\..*\\.so" />
-                <data android:pathPattern="/.*\\..*\\..*\\.so" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.so" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.so" />
-                <data android:pathPattern="/.*\\.mcworld" />
-                <data android:pathPattern="/.*\\..*\\.mcworld" />
-                <data android:pathPattern="/.*\\..*\\..*\\.mcworld" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.mcworld" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.mcworld" />
-                <data android:pathPattern="/.*\\.mcpack" />
-                <data android:pathPattern="/.*\\..*\\.mcpack" />
-                <data android:pathPattern="/.*\\..*\\..*\\.mcpack" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.mcpack" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.mcpack" />
-                <data android:pathPattern="/.*\\.mcaddon" />
-                <data android:pathPattern="/.*\\..*\\.mcaddon" />
-                <data android:pathPattern="/.*\\..*\\..*\\.mcaddon" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.mcaddon" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.mcaddon" />
-                <data android:pathPattern="/.*\\.mctemplate" />
-                <data android:pathPattern="/.*\\..*\\.mctemplate" />
-                <data android:pathPattern="/.*\\..*\\..*\\.mctemplate" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\.mctemplate" />
-                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.mctemplate" />
+
+                <!-- Esquemas file:// e content:// -->
+                <data android:scheme="file" />
+                <data android:scheme="content" />
+                
+                <!-- Sufixos específicos do Minecraft -->
+                <data android:pathSuffix=".mcworld" />
+                <data android:pathSuffix=".mcpack" />
+                <data android:pathSuffix=".mcaddon" />
+                <data android:pathSuffix=".mctemplate" />
                 <data android:pathSuffix=".zip" />
                 <data android:pathSuffix=".levibackup" />
                 <data android:pathSuffix=".levipack" />
                 <data android:pathSuffix=".mcmod" />
                 <data android:pathSuffix=".so" />
-                <data android:pathSuffix=".mcworld" />
-                <data android:pathSuffix=".mcpack" />
-                <data android:pathSuffix=".mcaddon" />
-                <data android:pathSuffix=".mctemplate" />
             </intent-filter>
 
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="file" />
-                <data android:mimeType="application/zip" />
-                <data android:mimeType="application/x-zip" />
-                <data android:mimeType="application/x-zip-compressed" />
-                <data android:mimeType="application/octet-stream" />
-            </intent-filter>
+            <!-- 3. Captura Convites Xbox Live -->
             <intent-filter>
                 <action android:name="xbox_live_game_invite" />
                 <action android:name="xbox_live_achievement_unlock" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
+        <!-- Atividades de Carregamento e Jogo (Embutido) -->
         <activity
             android:name=".core.minecraft.MinecraftLoadingActivity"
             android:alwaysRetainTaskState="true"
@@ -496,6 +394,7 @@
             android:theme="@style/LauncherRestartTheme"
             tools:ignore="DiscouragedApi" />
 
+        <!-- Integração com Microsoft (Auth/Login) -->
         <activity
             android:name="com.microsoft.xal.browser.IntentHandler"
             android:exported="true"
@@ -529,6 +428,7 @@
             android:alwaysRetainTaskState="true"
             tools:replace="android:configChanges,android:exported" />
 
+        <!-- Crash Handler -->
         <activity
             android:name="org.levimc.launcher.ui.activities.CrashActivity"
             android:exported="false"
@@ -538,16 +438,23 @@
             android:theme="@style/Base.Theme.FullScreen"
             android:configChanges="fontScale|density|smallestScreenSize|screenSize|uiMode|screenLayout|orientation|navigation|keyboardHidden|keyboard|touchscreen|locale|mnc|mcc" />
 
+        <!-- 
+            FILE PROVIDER: Essencial para o Bypass do PairIP
+            Permite compartilhar arquivos locais (mundos, mods) com o Minecraft
+            oficial via URIs content:// seguros, contornando restrições de 
+            AttributionSource para conteúdo protegido.
+        -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:exported="false"
             android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths" />
         </provider>
 
+        <!-- Remove Provider do Firebase se não estiver sendo usado -->
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
             android:authorities="${applicationId}.firebaseinitprovider"
